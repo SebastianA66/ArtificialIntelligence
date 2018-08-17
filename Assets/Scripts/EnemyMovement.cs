@@ -6,33 +6,44 @@ using UnityEngine.AI;
 public class EnemyMovement : MonoBehaviour
 {
     
-    public Transform[] waypoints;
-    private int destPoint = 0;
+    //public Transform[] waypoints;
+
+    public Transform waypointParent;
+    public float stoppingDistance = 1f;
+
+    private Transform[] waypoints;
+
+
+    //defining waypoints
+    private int currentIndex = 1;
+    //The destination points
     private NavMeshAgent agent;
+    // defining navigational floors for the enemy
 
      
     // Use this for initialization
     void Start()
     {
+        waypoints = waypointParent.GetComponentsInChildren<Transform>();
+
         agent = GetComponent<NavMeshAgent>();
-        agent.autoBraking = false;
-
-        GoToNextPoint();
+        
     }
 
-    void GoToNextPoint()
-    {
-        if (waypoints.Length == 2)
-            return;
-
-        agent.destination = waypoints[destPoint].position;
-        destPoint = (destPoint + 1) % waypoints.Length;
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (!agent.pathPending && agent.remainingDistance < 2f)
-            GoToNextPoint();
+        Transform point = waypoints[currentIndex];
+
+        float distance = Vector3.Distance(transform.position, point.position); //transform.position is the agent
+        if (distance < stoppingDistance)
+        {
+            // currentIndex += 1
+            currentIndex++;
+            if (currentIndex >= waypoints.Length)
+            {
+                currentIndex = 1;
+            }
+        }
+        agent.SetDestination(point.position);
     }
 }
