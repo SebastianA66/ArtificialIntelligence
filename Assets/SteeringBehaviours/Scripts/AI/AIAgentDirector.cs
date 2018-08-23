@@ -1,16 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class AIAgentDirector : MonoBehaviour {
+namespace SteeringBehaviours
+{
+    public class AIAgentDirector : MonoBehaviour
+    {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        public AIAgent agent;
+        void FixedUpdate()
+        {
+            Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(camRay, out hit, 1000f))
+            {
+                agent.SetTarget(hit.point);
+            }
+
+
+
+        }
+
+        void Update()
+        {
+
+        }
+    }
 }
