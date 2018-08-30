@@ -17,9 +17,9 @@ namespace SteeringBehaviours
 
         void Update()
         {
-            if (point.magnitude > 0)
+            if (point.magnitude > 0) //if there is a point set
             {
-                agent.SetDestination(point);
+                agent.SetDestination(point); //Set the agents destination to the point
             }
             
         }
