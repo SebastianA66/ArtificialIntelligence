@@ -1,11 +1,16 @@
 ﻿using System.Collections;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraBounds : MonoBehaviour
 {
     public Vector3 size = new Vector3(50f, 0f, 20f);
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, size);
+    }
 
     public Vector3 GetAdjustedPosition(Vector3 incomingPos)
     {
@@ -42,17 +47,8 @@ public class CameraBounds : MonoBehaviour
         {
             incomingPos.y = pos.y - halfSize.y;
         }
-    }
-    // Use this for initialization
-    void Start()
-    {
-                
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-
+        return incomingPos;
     }
+   
 }
