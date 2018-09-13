@@ -10,7 +10,16 @@ public class CameraBounds : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, size);
+
+       
     }
+
+    /// <summary>
+    /// This function returns an adjusted vector3
+    /// </summary>
+    /// <param name="incomingPos"></param>
+    /// <returns></returns>
+
 
     public Vector3 GetAdjustedPosition(Vector3 incomingPos)
     {

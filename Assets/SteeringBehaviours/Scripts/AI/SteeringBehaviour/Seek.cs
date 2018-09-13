@@ -10,7 +10,12 @@ namespace SteeringBehaviours
         public float stoppingDistance;
         public override Vector3 GetForce()
         {
-            return base.GetForce();
+            // Get direction to target
+            Vector3 velocity = target.position - owner.transform.position;
+            // Normalize direction (remove the magnitude part of vector)
+            velocity.Normalize();
+            // return velocity (direction x speed)
+            return velocity * owner.maxSpeed;
         }
     }
 }
