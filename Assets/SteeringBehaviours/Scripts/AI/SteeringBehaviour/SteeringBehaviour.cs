@@ -11,9 +11,9 @@ namespace SteeringBehaviours
     {
         public float weighting; //How much influence the behaviour has over other behaviours
         public AIAgent owner; //Reference to AIAgent owner of behaviour
-        private void Awake()
+        private void Awake() // Runs before Start. Awake runs regardless whether or not the GameObject is enabled
         {
-
+            owner = GetComponent<AIAgent>();
         }
         public virtual Vector3 GetForce()
         {
